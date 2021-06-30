@@ -1,2 +1,2 @@
-# texcoder
-A simple tool for crypt and encrypt your text
+# textcoder
+A simple tool for crypt and encrypt your text.
