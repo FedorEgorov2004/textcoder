@@ -38,17 +38,17 @@ def dt():
 
 def eng():
     global l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14;
-    l1 = "Input '0' to crypt your text";
-    l2 = "Input '1' to encrypt your text";
+    l1 = "Input '0' to encrypt your text";
+    l2 = "Input '1' to decrypt your text";
     l3 = "Input '2' to exit and save history";
-    l4 = 'Input a text to crypt it:';
-    l5 = 'Input a crypted text to encrypt it:';
+    l4 = 'Input a text to encrypt it:';
+    l5 = 'Input a crypted text to decrypt it:';
     l6 = 'Crypted text:';
     l7 = 'Encrypted text:';
     l8 = "Input '3' to see history"
     l9 = 'Welcome to';
-    l10 = 'Text was crypted and copied. Click "Enter" to continue';
-    l11 = 'Text was encrypted and copied. Click "Enter" to continue';
+    l10 = 'Text was encrypted and copied. Click "Enter" to continue';
+    l11 = 'Text was decrypted and copied. Click "Enter" to continue';
     l12 = 'Saving file...';
     l13 = "Click 'Enter' to continue";
     l14 = 'History:\n';
