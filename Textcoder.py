@@ -5,7 +5,9 @@ import colorama;
 from colorama import Fore, Style;
 import datetime;
 from datetime import datetime;
+import ctypes;
 colorama.init();
+ctypes.windll.kernel32.SetConsoleTitleW('Textcoder');
 
 history = '';
 os.system("cls");
