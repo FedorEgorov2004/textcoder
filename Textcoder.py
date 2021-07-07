@@ -14,7 +14,9 @@ def dt():
     global td, d, m, y, h, mi, s, date;
     td = datetime.today();
 
-    d = str(td.day);
+    d = td.day;
+    if d < 10: d = '0' + str(d);
+    d = str(d);
 
     m = td.month;
     if m < 10: m = '0' + str(m);
