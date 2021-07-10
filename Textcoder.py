@@ -4,6 +4,8 @@ from random import randint;
 import pyperclip;
 import colorama;
 from colorama import Fore, Style;
+import math;
+from math import sin, cos, log;
 import datetime;
 from datetime import datetime;
 import ctypes;
@@ -60,7 +62,7 @@ while True:
         l12 = 'Saving file...';
         l13 = "Click 'Enter' to continue";
         l14 = 'History:\n';
-        l15 = 'Come up with and/or enter your cryptography key (seed),\nusing latin and cyrillic alphabet, special symbols and numbers:\n';
+        l15 = 'Come up with and/or enter your cryptography key (seed),\nusing latin and cyrillic alphabet, special symbols and numbers (a little simple, a little complex):\n';
         l16 = 'Do you want to save your key to a new file? If you forgot it,\nyou can use the file and get the access to encrypted information by the key.\n(y/n)?';
         l17 = 'Enter a path to any text file for encrypt it:';
         l18 = 'Enter a path to any text file for decrypt it:';
@@ -70,6 +72,7 @@ while True:
         l22 = 'Name the file:';
         l23 = "Enter '3' to encrypt a text file";
         l24 = "Enter '4' to decrypt a text file";
+        l25 = "Sorry, an error was occurred: please, come up with another, shorter key"
         break;
 
     if a == '1':
@@ -87,7 +90,7 @@ while True:
         l12 = 'Сохранение файла...'
         l13 = 'Нажмите Enter, чтобы продолжить';
         l14 = 'История:\n';
-        l15 = 'Придумайте и/или введите свой криптографический ключ (зерно),\nиспользуя кириллицу, латиницу, цифры и специальные знаки:\n';
+        l15 = 'Придумайте и/или введите свой криптографический ключ (сид),\nиспользуя кириллицу, латиницу, цифры и специальные знаки (немного простой, немного сложный):\n';
         l16 = 'Вы хотите сохранить свой ключ в отдельном файле?\nПри сохранении ключа у вас будет доступ к зашифрованной вами информации.\ny - Да\nn - Нет';
         l17 = 'Введите путь файла для шифровки:';
         l18 = 'Введите путь файла для расшифровки:';
@@ -97,6 +100,7 @@ while True:
         l22 = 'Назовите файл:';
         l23 = "Введите '3' для шифрования файла";
         l24 = "Введите '4' для расшифрования файла";
+        l25 = 'Простите, произошла ошибка: придумайте другой, более короткий ключ';
         break;
     else:
         os.system('cls');
@@ -111,56 +115,106 @@ arr_symb = [',', '.', '!', ':', '#', '@', '$', '"', "'", '=', '-', '+', '*', '/'
 
 arr = arr_en + arr_ru + arr_symb + arr_EN + arr_RU;
 
+start_symbols = ["à", "æ", "ó", "œ", "ë", "á", "«", "»", "±", "<", '⁰', '¹', "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¿", "‽", "¡", "Æ", "Á", "É", "Ë", "ñ", ">", "Ê", "è", "ê", "û", "È", "Û", "û", "Ù", "ù" "Ú", "ú", "Ū", "ū", "ā", "Ā", "Ò", "Õ", "ò", "Ó", "õ", "Ô", "ô", "°"];
+start_symbols = start_symbols * 10;
+
 while True:
-    print(l15);
-    key = input();
-    if key == '':
-        os.system('cls');
-    else:
-        break;
+    try:
+        print(l15);
+        key = input();
+        if key == '':
+            os.system('cls');
+        else:
+            break;
+    except:
+        print(Fore.RED + l25 + Style.RESET_ALL);
+        time.sleep(1.5);
+
+count_key_symbols = len(key);
+arr_key_len = [];
+arrl = [];
+
+for i in arr:
+    if i in key:
+        for ii in range(key.count(i)):
+            arr_key_len.append(arr.index(i) + 1);
+
+for i in range(1,10):
+    if str(i) in key:
+        for ii in range(key.count(str(i))):
+            arr_key_len.append(i);
+
+if '0' in key:
+    for i in range(key.count('0')):
+        arr_key_len.append(1);
 
 b = 1;
 
-len_arr = [];
+for i in arr_key_len:
+    b = b * i;
 
-for count in range(len(arr)):
-    len_arr.append(count);
-    
-for i in len_arr:
-    if arr[i] in key:
-        b = b * len_arr[i];
+b = b * sin(count_key_symbols);
 
-for i in len_arr:
-    if str(len_arr[i]) in key:
-        b = b * len_arr[i];
+q = 0.1;
 
-arrl = [];
+for i in range(count_key_symbols):
+    b = b * q;
+    q = q + 1.1;
 
-for a in arr_en:
-    if b < 10:
-        arrl.append('a0' + str(b));
-    else:
-        arrl.append('a' + str(b));
+if b < 0:
+    b = b * (-2);
+
+if b < 10:
+    b = b * 100;
+
+if b < 100:
+    b = b * 10;
+
+b = math.ceil(b);
+
+if b > 1000000000:
+    b = str(b);
+    b = b[0:10];
+    b = int(b);
+
+b_string = str(b);
+
+if b_string[-1] == '0':
     b = b + 1;
+    b_string = str(b);
 
-for a in arr_ru:
-    arrl.append('a' + str(b));
-    b = b + 1;
-
-for a in arr_symb:
-    arrl.append('a' + str(b));
-    b = b + 1;
-
-for a in arr_EN:
-    if b < 10:
-        arrl.append('b0' + str(b));
-    else:
-        arrl.append('b' + str(b));
-    b = b + 1;
-
-for a in arr_RU:
-    arrl.append('b' + str(b));
-    b = b + 1;
+if len(b_string) == 0:
+    for i in range(len(arr)):
+        pos1 = len(b_string) / 2;
+        pos1 = int(pos1);
+        pos = (i + 1) * cos(int(b_string[pos1] + 1)) + log(i + 1)/2;
+        if pos == 0:
+            pos = i * sin(int(b_string[pos1]));
+        if pos < 0:
+            pos = pos * -1;
+        if 0 > pos >= 1:
+            pos = pos * 100;
+        pos = math.ceil(pos);
+        if pos > 200:
+            pos = pos - 200;
+        start_letter = start_symbols[pos];
+        arrl.append(start_letter + str(b * (i + 1)));
+else:
+    for i in range(len(arr)):
+        pos1 = len(b_string) / 2 + 0.5;
+        pos1 = int(pos1);
+        pos = (i + 1) * cos(int(b_string[pos1])) + log(i + 1)/2;
+        if pos == 0:
+            pos = i * sin(int(b_string[pos1]));
+        if pos < 0:
+            pos = pos * -1;
+        if 0 > pos >= 1:
+            pos = pos * 100;
+        pos = math.ceil(pos);
+        if pos > 200:
+            pos = pos - 200;
+        start_letter = start_symbols[pos];
+        arrl.append(start_letter + str(b * (i + 1)));
 
 os.system('cls');
 
@@ -168,7 +222,7 @@ while True:
     print(l16);
     s = input();
     if s == 'y':
-        keyfile = open('textcoder_key.txt', 'a+');
+        keyfile = open('textcoder_key.txt', 'a+', encoding="utf-8");
         keytext = 'Key: ' + key + '\n';
         keyfile.write(keytext);
         keyfile.close();
@@ -199,7 +253,8 @@ while True:
 
         for i in range(len(arr)):
             if arr[i] in t:
-                t = t.replace(arr[i],arrl[i]);
+                t = t.replace(arr[i], arrl[i], t.count(arr[i]));
+
         
         pyperclip.copy(t);
 
@@ -216,7 +271,7 @@ while True:
 
         print(l5);
         t = input();
-
+        
         for i in range(len(arr)):
             if arrl[i] in t:
                 t = t.replace(arrl[i],arr[i]);
@@ -234,8 +289,10 @@ while True:
     if a == '5':
         os.system('cls');
         print(l12);
-        f = open('textcoder_history.txt', 'a+');
+        f = open('textcoder_history.txt', 'a+', encoding='utf-8');
         f.write(history);
+        time.sleep(1);
+        f.close();
         sys.close();
 
     if a == '2':
@@ -254,7 +311,7 @@ while True:
             t = file.read();
             for i in range(len(arr)):
                 if arr[i] in t:
-                    t = t.replace(arr[i],arrl[i]);
+                    t = t.replace(arr[i],arrl[i],t.count(arr[i]));
 
             os.system('cls');
             print(l20);
@@ -267,14 +324,14 @@ while True:
             else:
                 path = path + '\\' + namefile + '.txt';
         
-            new_file = open(path,'a+');
+            new_file = open(path,'a+',encoding="utf-8");
             new_file.write(t);
             new_file.close();
             file.close();
             os.system("cls");
         except:
             print(Fore.RED + l19 + Style.RESET_ALL);
-            time.sleep(3);
+            time.sleep(1.5);
 
     if a == '4':
         try:
@@ -298,14 +355,14 @@ while True:
             else:
                 path = path + '\\' + namefile + '.txt';
         
-            new_file = open(path,'a+');
+            new_file = open(path,'a+', encoding="utf-8");
             new_file.write(t);
             new_file.close();
             file.close();
             os.system("cls");
         except:
             print(Fore.RED + l19 + Style.RESET_ALL);
-            time.sleep(3);
+            time.sleep(1.5);
             os.system("cls");
     else:
         os.system("cls");
