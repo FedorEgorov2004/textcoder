@@ -44,66 +44,97 @@ def dt():
 
     date = d + '.' + m + '.' + y + ', ' + h + ':' + mi + ':' + s + ":\n";
 
-while True:
-    print('Choose your language. Выберите свой язык.\n0 - English\n1 - Русский');
-    a = input();
-    if a == '0':
-        l1 = "Input '0' to encrypt your text";
-        l2 = "Input '1' to decrypt your text";
-        l3 = "Input '5' to exit and save history";
-        l4 = 'Input a text to encrypt it:';
-        l5 = 'Input a crypted text to decrypt it:';
-        l6 = 'Crypted text:';
-        l7 = 'Encrypted text:';
-        l8 = "Input '2' to see history"
-        l9 = 'Welcome to';
-        l10 = 'Text was encrypted and copied. Click "Enter" to continue.';
-        l11 = 'Text was decrypted and copied. Click "Enter" to continue.';
-        l12 = 'Saving file...';
-        l13 = "Click 'Enter' to continue";
-        l14 = 'History:\n';
-        l15 = 'Come up with and/or enter your cryptography key (seed),\nusing latin and cyrillic alphabet, special symbols and numbers (a little simple, a little complex):\n';
-        l16 = 'Do you want to save your key to a new file? If you forgot it,\nyou can use the file and get the access to encrypted information by the key.\n(y/n)?';
-        l17 = 'Enter a path to any text file for encrypt it:';
-        l18 = 'Enter a path to any text file for decrypt it:';
-        l19 = 'Incorrect path: try again.'
-        l20 = 'Enter a new path to a new encrypted file:';
-        l21 = 'Enter a new path to a new decrypted file:';
-        l22 = 'Name the file:';
-        l23 = "Enter '3' to encrypt a text file";
-        l24 = "Enter '4' to decrypt a text file";
-        l25 = "Sorry, an error was occurred: please, come up with another, shorter key"
-        break;
+def en_l():
+    global l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25;
+    l1 = "Input '0' to encrypt your text";
+    l2 = "Input '1' to decrypt your text";
+    l3 = "Input '5' to exit and save history";
+    l4 = 'Input a text to encrypt it:';
+    l5 = 'Input a crypted text to decrypt it:';
+    l6 = 'Crypted text:';
+    l7 = 'Encrypted text:';
+    l8 = "Input '2' to see history"
+    l9 = 'Welcome to';
+    l10 = 'Text was encrypted and copied. Click "Enter" to continue.';
+    l11 = 'Text was decrypted and copied. Click "Enter" to continue.';
+    l12 = 'Saving file...';
+    l13 = "Click 'Enter' to continue";
+    l14 = 'History:\n';
+    l15 = 'Come up with and/or enter your cryptography key (seed),\nusing latin and cyrillic alphabet, special symbols and numbers (a little simple, a little complex):\n';
+    l16 = 'Do you want to save your key to a new file? If you forgot it,\nyou can use the file and get the access to encrypted information by the key.\n(y/n)?';
+    l17 = 'Enter a path to any text file for encrypt it:';
+    l18 = 'Enter a path to any text file for decrypt it:';
+    l19 = 'Incorrect path: try again.'
+    l20 = 'Enter a new path to a new encrypted file:';
+    l21 = 'Enter a new path to a new decrypted file:';
+    l22 = 'Name the file:';
+    l23 = "Enter '3' to encrypt a text file";
+    l24 = "Enter '4' to decrypt a text file";
+    l25 = "Sorry, an error was occurred: please, come up with another, shorter key";
 
-    if a == '1':
-        l1 = "Введите '0' для шифровки текста";
-        l2 = "Введите '1' для расшифровки текста";
-        l3 = "Введите '5' для выхода из программы и сохранения истории";
-        l4 = 'Введите текст для шифровки:';
-        l5 = 'Введите зашифрованный текст для расшифровки:';
-        l6 = 'Зашифрованный текст:';
-        l7 = 'Расшифрованный текст:';
-        l8 = "Введите '2' для того, чтобы показать историю"
-        l9 = 'Добро пожаловать в';
-        l10 = 'Текст зашифрован и скопирован. Нажмите Enter, чтобы продолжить.';
-        l11 = 'Текст расшифрован и скопирован. Нажмите Enter, чтобы продолжить.';
-        l12 = 'Сохранение файла...'
-        l13 = 'Нажмите Enter, чтобы продолжить';
-        l14 = 'История:\n';
-        l15 = 'Придумайте и/или введите свой криптографический ключ (сид),\nиспользуя кириллицу, латиницу, цифры и специальные знаки (немного простой, немного сложный):\n';
-        l16 = 'Вы хотите сохранить свой ключ в отдельном файле?\nПри сохранении ключа у вас будет доступ к зашифрованной вами информации.\ny - Да\nn - Нет';
-        l17 = 'Введите путь файла для шифровки:';
-        l18 = 'Введите путь файла для расшифровки:';
-        l19 = 'Неверный путь: попробуйте ещё раз.';
-        l20 = 'Введите новый путь для зашифрованного файла:';
-        l21 = 'Введите новый путь для расшифрованного файла:';
-        l22 = 'Назовите файл:';
-        l23 = "Введите '3' для шифрования файла";
-        l24 = "Введите '4' для расшифрования файла";
-        l25 = 'Простите, произошла ошибка: придумайте другой, более короткий ключ';
-        break;
-    else:
-        os.system('cls');
+def ru_l():
+    global l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25;
+    l1 = "Введите '0' для шифровки текста";
+    l2 = "Введите '1' для расшифровки текста";
+    l3 = "Введите '5' для выхода из программы и сохранения истории";
+    l4 = 'Введите текст для шифровки:';
+    l5 = 'Введите зашифрованный текст для расшифровки:';
+    l6 = 'Зашифрованный текст:';
+    l7 = 'Расшифрованный текст:';
+    l8 = "Введите '2' для того, чтобы показать историю"
+    l9 = 'Добро пожаловать в';
+    l10 = 'Текст зашифрован и скопирован. Нажмите Enter, чтобы продолжить.';
+    l11 = 'Текст расшифрован и скопирован. Нажмите Enter, чтобы продолжить.';
+    l12 = 'Сохранение файла...'
+    l13 = 'Нажмите Enter, чтобы продолжить';
+    l14 = 'История:\n';
+    l15 = 'Придумайте и/или введите свой криптографический ключ (сид),\nиспользуя кириллицу, латиницу, цифры и специальные знаки (немного простой, немного сложный):\n';
+    l16 = 'Вы хотите сохранить свой ключ в отдельном файле?\nПри сохранении ключа у вас будет доступ к зашифрованной вами информации.\ny - Да\nn - Нет';
+    l17 = 'Введите путь файла для шифровки:';
+    l18 = 'Введите путь файла для расшифровки:';
+    l19 = 'Неверный путь: попробуйте ещё раз.';
+    l20 = 'Введите новый путь для зашифрованного файла:';
+    l21 = 'Введите новый путь для расшифрованного файла:';
+    l22 = 'Назовите файл:';
+    l23 = "Введите '3' для шифрования файла";
+    l24 = "Введите '4' для расшифрования файла";
+    l25 = 'Простите, произошла ошибка: придумайте другой, более короткий ключ';
+
+def choose_l():
+    while True:
+        print('Choose your language. Выберите свой язык.\n0 - English\n1 - Русский');
+        a = input();
+        if a == '0':
+            en_l();
+            en = open('C:\\Users\\Public\\textcoder_locale', "w+", encoding='utf-8');
+            en.write('en');
+            en.close();
+            break;
+
+        if a == '1':
+            ru_l();
+            ru = open('C:\\Users\\Public\\textcoder_locale', "w+", encoding='utf-8');
+            ru.write('ru');
+            ru.close();
+            break;
+        else:
+            os.system('cls');
+
+path = 'C:\\Users\\Public\\textcoder_locale';
+
+if os.path.isfile(path):
+    locale = open('C:\\Users\\Public\\textcoder_locale', 'r');
+    check_l = locale.read();
+    locale.close();
+    if check_l == 'en':
+        en_l();
+    if check_l == 'ru':
+        ru_l();
+    if check_l == '':
+        choose_l();
+
+else:
+    choose_l();
 
 os.system('cls');
 
@@ -177,6 +208,13 @@ if b > 1000000000:
     b = b[0:10];
     b = int(b);
 
+b = b * count_key_symbols;
+
+if b > 1000000000:
+    b = str(b);
+    b = b[0:10];
+    b = int(b);
+
 b_string = str(b);
 
 if b_string[-1] == '0':
@@ -242,6 +280,7 @@ while True:
     print(l23);
     print(l24);
     print(l3);
+    print("Print '10' to reset Textcoder (сбросить настройки)");
 
     a = input();
 
@@ -364,5 +403,14 @@ while True:
             print(Fore.RED + l19 + Style.RESET_ALL);
             time.sleep(1.5);
             os.system("cls");
+    if a == '10':
+        if os.path.isfile(path):
+            reset = open(path, 'w+', encoding='utf-8');
+            reset.write('');
+            reset.close();
+            os.system('cls');
+            print('Settings have been reset. Run Textcoder again.\nНастройки сброшены. Запустите Textcoder заново.');
+            time.sleep(5);
+            sys.close();
     else:
         os.system("cls");
