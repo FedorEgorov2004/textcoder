@@ -1,8 +1,6 @@
 # Textcoder
 A simple tool for crypt and decrypt your text and files by your cryptographic file, see history of the outputs and save it all in a file.
 
-You can see and download a source code (.py) and use a compiled program for Windows.
-
-Download .exe: https://github.com/FatlessComb1168/textcoder/raw/main/Textcoder.exe
+You should download and install Python at first and install libraries for Textcoder here: 
 
 Download the source code: https://github.com/FatlessComb1168/textcoder/raw/main/Textcoder.py
