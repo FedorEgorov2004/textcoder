@@ -5,4 +5,4 @@ You should download and install Python (python.org) at first and install librari
 
 Download the source code: https://github.com/FatlessComb1168/textcoder/raw/main/Textcoder.py
 
-You can download the classic Textcoder here: https://github.com/FatlessComb1168/textcoder/classic
+You can download the classic Textcoder here: https://github.com/FatlessComb1168/textcoder/tree/classic
