@@ -1,6 +1,5 @@
 import os;
-import sys;
-from random import randint;
+import random;
 import pyperclip;
 import colorama;
 from colorama import Fore, Style;
@@ -45,7 +44,7 @@ def dt():
     date = d + '.' + m + '.' + y + ', ' + h + ':' + mi + ':' + s + ":\n";
 
 def en_l():
-    global l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25;
+    global l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,l26,l27,l28;
     l1 = "Input '0' to encrypt your text";
     l2 = "Input '1' to decrypt your text";
     l3 = "Input '5' to exit and save history";
@@ -60,8 +59,8 @@ def en_l():
     l12 = 'Saving file...';
     l13 = "Click 'Enter' to continue";
     l14 = 'History:\n';
-    l15 = 'Come up with and/or enter your cryptography key (seed),\nusing latin and cyrillic alphabet, special symbols and numbers (a little simple, a little complex):\n';
-    l16 = 'Do you want to save your key to a new file? If you forgot it,\nyou can use the file and get the access to encrypted information by the key.\n(y/n)?';
+    l15 = 'Enter a range of numbers for creating strings for a list.\nMinimum:\n';
+    l16 = '\nMaximum:\n';
     l17 = 'Enter a path to any text file for encrypt it:';
     l18 = 'Enter a path to any text file for decrypt it:';
     l19 = 'Incorrect path: try again.'
@@ -70,10 +69,13 @@ def en_l():
     l22 = 'Name the file:';
     l23 = "Enter '3' to encrypt a text file";
     l24 = "Enter '4' to decrypt a text file";
-    l25 = "Sorry, an error was occurred: please, come up with another, shorter key";
+    l25 = "Enter a path to save a crypt settings file (do not afraid __init__.py):\n";
+    l26 = '0 - Creating a new crypt settings file\n1 - Import';
+    l27 = 'Enter a path to a folder (!) where the file is located:';
+    l28 = 'Enter the name of the file (without path):'
 
 def ru_l():
-    global l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25;
+    global l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,l26,l27,l28;
     l1 = "Введите '0' для шифровки текста";
     l2 = "Введите '1' для расшифровки текста";
     l3 = "Введите '5' для выхода из программы и сохранения истории";
@@ -88,8 +90,8 @@ def ru_l():
     l12 = 'Сохранение файла...'
     l13 = 'Нажмите Enter, чтобы продолжить';
     l14 = 'История:\n';
-    l15 = 'Придумайте и/или введите свой криптографический ключ (сид),\nиспользуя кириллицу, латиницу, цифры и специальные знаки (немного простой, немного сложный):\n';
-    l16 = 'Вы хотите сохранить свой ключ в отдельном файле?\nПри сохранении ключа у вас будет доступ к зашифрованной вами информации.\ny - Да\nn - Нет';
+    l15 = 'Введите диапазон чисел для создания строк в массиве:\nМинимальное число:';
+    l16 = 'Максимальное число:';
     l17 = 'Введите путь файла для шифровки:';
     l18 = 'Введите путь файла для расшифровки:';
     l19 = 'Неверный путь: попробуйте ещё раз.';
@@ -98,7 +100,10 @@ def ru_l():
     l22 = 'Назовите файл:';
     l23 = "Введите '3' для шифрования файла";
     l24 = "Введите '4' для расшифрования файла";
-    l25 = 'Простите, произошла ошибка: придумайте другой, более короткий ключ';
+    l25 = 'Укажите путь для сохранения файла настроек шифрования (не бойтесь __init__.py):\n';
+    l26 = 'Выберите создание или импорт файла настроек шифрования.\n0 - Создание\n1 - Импорт';
+    l27 = 'Укажите путь к папке (!), где находится импортируемый файл:';
+    l28 = 'Введите название файла (без пути):';
 
 def choose_l():
     while True:
@@ -126,9 +131,9 @@ if os.path.isfile(path):
     locale = open('C:\\Users\\Public\\textcoder_locale', 'r');
     check_l = locale.read();
     locale.close();
-    if check_l == 'en':
+    if 'en' in check_l:
         en_l();
-    if check_l == 'ru':
+    if 'ru' in check_l:
         ru_l();
     if check_l == '':
         choose_l();
@@ -142,135 +147,142 @@ arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 
 arr_EN = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 arr_ru = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я'];
 arr_RU = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ы', 'Ъ', 'Э', 'Ю', 'Я', '~'];
-arr_symb = [',', '.', '!', ':', '#', '@', '$', '"', "'", '=', '-', '+', '*', '/', '%', ';', '^', '(', ')', '&', '?'];
+arr_symb = [',', '.', '!', ':', '#', '@', '$', '"', "'", '=', '-', '+', '*', '/', '%', ';', '^', '(', ')', '&', '?', '[', ']','<','>'];
+arr_n = ['0','1','2','3','4','5','6','7','8','9'];
 
 arr = arr_en + arr_ru + arr_symb + arr_EN + arr_RU;
+random.shuffle(arr);
 
-start_symbols = ["à", "æ", "ó", "œ", "ë", "á", "«", "»", "±", "<", '⁰', '¹', "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¿", "‽", "¡", "Æ", "Á", "É", "Ë", "ñ", ">", "Ê", "è", "ê", "û", "È", "Û", "û", "Ù", "ù" "Ú", "ú", "Ū", "ū", "ā", "Ā", "Ò", "Õ", "ò", "Ó", "õ", "Ô", "ô", "°"];
-start_symbols = start_symbols * 10;
+def get_random_unicode(length): # Author of function: Jacob Wan, Stack Overflow.
 
-while True:
     try:
-        print(l15);
-        key = input();
-        if key == '':
-            os.system('cls');
-        else:
-            break;
-    except:
-        print(Fore.RED + l25 + Style.RESET_ALL);
-        time.sleep(1.5);
+        get_char = unichr;
+    except NameError:
+        get_char = chr
 
-count_key_symbols = len(key);
-arr_key_len = [];
+    # Update this to include code point ranges to be sampled
+    include_ranges = [
+        ( 0x0021, 0x0021 ),
+        ( 0x0023, 0x0026 ),
+        ( 0x0028, 0x007E ),
+        ( 0x00A1, 0x00AC ),
+        ( 0x00AE, 0x00FF ),
+        ( 0x0100, 0x017F ),
+        ( 0x0180, 0x024F ),
+        ( 0x2C60, 0x2C7F ),
+        ( 0x16A0, 0x16F0 ),
+        ( 0x0370, 0x0377 ),
+        ( 0x037A, 0x037E ),
+        ( 0x0384, 0x038A ),
+        ( 0x038C, 0x038C ),
+    ]
+
+    alphabet = [
+        get_char(code_point) for current_range in include_ranges
+            for code_point in range(current_range[0], current_range[1] + 1)
+    ]
+    return ''.join(random.choice(alphabet) for i in range(length));
+
+b = '';
 arrl = [];
 
-for i in arr:
-    if i in key:
-        for ii in range(key.count(i)):
-            arr_key_len.append(arr.index(i) + 1);
-
-for i in range(1,10):
-    if str(i) in key:
-        for ii in range(key.count(str(i))):
-            arr_key_len.append(i);
-
-if '0' in key:
-    for i in range(key.count('0')):
-        arr_key_len.append(1);
-
-b = 1;
-
-for i in arr_key_len:
-    b = b * i;
-
-b = b * sin(count_key_symbols);
-
-q = 0.1;
-
-for i in range(count_key_symbols):
-    b = b * q;
-    q = q + 1.1;
-
-if b < 0:
-    b = b * (-2);
-
-if b < 10:
-    b = b * 100;
-
-if b < 100:
-    b = b * 10;
-
-b = math.ceil(b);
-
-if b > 1000000000:
-    b = str(b);
-    b = b[0:10];
-    b = int(b);
-
-b = b * count_key_symbols;
-
-if b > 1000000000:
-    b = str(b);
-    b = b[0:10];
-    b = int(b);
-
-b_string = str(b);
-
-if b_string[-1] == '0':
-    b = b + 1;
-    b_string = str(b);
-
-if len(b_string) == 0:
-    for i in range(len(arr)):
-        pos1 = len(b_string) / 2;
-        pos1 = int(pos1);
-        pos = (i + 1) * cos(int(b_string[pos1] + 1)) + log(i + 1)/2;
-        if pos == 0:
-            pos = i * sin(int(b_string[pos1]));
-        if pos < 0:
-            pos = pos * -1;
-        if 0 > pos >= 1:
-            pos = pos * 100;
-        pos = math.ceil(pos);
-        if pos > 200:
-            pos = pos - 200;
-        start_letter = start_symbols[pos];
-        arrl.append(start_letter + str(b * (i + 1)));
-else:
-    for i in range(len(arr)):
-        pos1 = len(b_string) / 2 + 0.5;
-        pos1 = int(pos1);
-        pos = (i + 1) * cos(int(b_string[pos1])) + log(i + 1)/2;
-        if pos == 0:
-            pos = i * sin(int(b_string[pos1]));
-        if pos < 0:
-            pos = pos * -1;
-        if 0 > pos >= 1:
-            pos = pos * 100;
-        pos = math.ceil(pos);
-        if pos > 200:
-            pos = pos - 200;
-        start_letter = start_symbols[pos];
-        arrl.append(start_letter + str(b * (i + 1)));
-
 os.system('cls');
 
 while True:
-    print(l16);
-    s = input();
-    if s == 'y':
-        keyfile = open('textcoder_key.txt', 'a+', encoding="utf-8");
-        keytext = 'Key: ' + key + '\n';
-        keyfile.write(keytext);
-        keyfile.close();
-        break;
-    if s == 'n':
-        break;
+    print(l26);
+    a = input();
+
+    if a == '0':
+        while True:
+            os.system('cls');
+            print(l15);
+            first = input();
+            print(l16);
+            second = input();
+            try:
+                first = int(first);
+                second = int(second);
+                break;
+            except:
+                os.system('cls');
+
+        arr_exc = [];
+
+        def stringg():
+            global b;
+            rand = random.randint(first, second);
+            if rand == 1:
+                for i in range(rand):
+                    a = get_random_unicode(1);
+                    if a in arr or a in arr_exc or a in arr_n:
+                        stringg();
+                    else:
+                        arr_exc.append(a);
+                        b = b + a;
+            else:
+                for i in range(rand):
+                    a = get_random_unicode(1);
+                    if a in arr or a in arr_exc or a in arr_n:
+                        stringg();
+                    else:
+                        b = b + a;
+
+        for lc in range(145):
+            stringg();
+            arrl.append(b);
+            b = '';
+
+        try:
+            os.system('cls');
+            print(l25);
+            path = input();
+            pathd = path + '\\' + '__init__.py';
+            init = open(pathd,'w+');
+            init.close();
+            os.system("cls");
+            print(l22);
+            namefile = input();
+            path = path + '\\' + namefile + '.py';
+
+            new_file = open(path,'a+',encoding="utf-8");
+            new_file.write('arr1 = ' + str(arr) + '\n' + 'arr2 = ' + str(arrl));
+            new_file.close();
+            os.system("cls");
+            break;
+
+        except:
+            print(Fore.RED + l19 + Style.RESET_ALL);
+            time.sleep(1.5);
+            os.system('cls');
+
+    if a == '1':
+        try:
+            os.system('cls');
+
+            print(l28);
+
+            path = input();
+
+            pathd = path + '\\..\\' + '__init__.py';
+
+            init = open(pathd,'w+');
+            init.close();
+
+            namefile = os.path.basename(path);
+            namefile = namefile[0:-3];
+            namefile = __import__(namefile);
+            arr = namefile.arr1;
+            arrl = namefile.arr2;
+            os.system("cls");
+            break;
+
+        except:
+            print(Fore.RED + l19 + Style.RESET_ALL);
+            time.sleep(1.5);
+            os.system('cls');
+
     else:
         os.system('cls');
-
-os.system('cls');
 
 while True:
     print(Fore.YELLOW + l9, 'Textcoder!', Style.RESET_ALL);
@@ -332,7 +344,7 @@ while True:
         f.write(history);
         time.sleep(1);
         f.close();
-        sys.close();
+        break;
 
     if a == '2':
         os.system('cls');
@@ -411,6 +423,6 @@ while True:
             os.system('cls');
             print('Settings have been reset. Run Textcoder again.\nНастройки сброшены. Запустите Textcoder заново.');
             time.sleep(5);
-            sys.close();
+        break;
     else:
         os.system("cls");
