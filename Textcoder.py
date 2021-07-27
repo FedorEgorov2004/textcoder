@@ -12,7 +12,9 @@ import time;
 colorama.init();
 ctypes.windll.kernel32.SetConsoleTitleW('Textcoder');
 
+ef2 = open('ef.py', 'w+', encoding="utf-8");
 history = '';
+
 os.system("cls");
 
 def dt():
@@ -145,11 +147,15 @@ arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 
 arr_EN = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 arr_ru = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я'];
 arr_RU = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ы', 'Ъ', 'Э', 'Ю', 'Я', '~'];
-arr_symb = [',', '.', '!', ':', '#', '@', '$', '"', "'", '=', '-', '+', '*', '/', '%', ';', '^', '(', ')', '&', '?', '[', ']','<','>'];
+arr_symb = [',', '.', '!', ':', '#', '@', '$', '"', "'", '=', '-', '+', '*', '/', '%', ';', '^', '(', ')', '&', '?', '[', ']','<','>','_'];
 arr_n = ['0','1','2','3','4','5','6','7','8','9'];
 
 arr = arr_en + arr_ru + arr_symb + arr_EN + arr_RU;
 random.shuffle(arr);
+random.shuffle(arr_en);
+random.shuffle(arr_EN);
+arr_ascii = arr_en + arr_EN;
+
 
 def get_random_unicode(length): # Author of function: Jacob Wan, Stack Overflow.
 
@@ -185,7 +191,6 @@ b = '';
 arrl = [];
 
 os.system('cls');
-
 while True:
     print(l26);
     a = input();
@@ -225,25 +230,27 @@ while True:
                     else:
                         b = b + a;
 
-        for lc in range(145):
+        for lc in range(146):
             stringg();
             arrl.append(b);
             b = '';
+        
+        arrl = arrl[0:146];
 
         try:
             os.system('cls');
             print(l25);
             path = input();
             pathd = path + '\\' + '__init__.py';
-            init = open(pathd,'w+');
+            init = open(pathd,'w');
             init.close();
             os.system("cls");
             print(l22);
             namefile = input();
             path = path + '\\' + namefile + '.py';
 
-            new_file = open(path,'a+',encoding="utf-8");
-            new_file.write('arr1 = ' + str(arr) + '\n' + 'arr2 = ' + str(arrl));
+            new_file = open(path,'w',encoding="utf-8");
+            new_file.write('arr1 = ' + str(arr) + '\n' + 'arr2 = ' + str(arrl) + '\n' + 'arr_ascii =' + str(arr_ascii));
             new_file.close();
             os.system("cls");
             break;
@@ -271,6 +278,7 @@ while True:
             namefile = __import__(namefile);
             arr = namefile.arr1;
             arrl = namefile.arr2;
+            arr_ascii = namefile.arr_ascii;
             os.system("cls");
             break;
 
@@ -355,29 +363,38 @@ while True:
         try:
             os.system('cls');
             print(l17);
+            
             path = input();
-            file = open(path,'r', encoding="utf-8");
+            file = open(path,'rb');
+
             t = file.read();
-            for i in range(len(arr)):
-                if arr[i] in t:
-                    t = t.replace(arr[i],arrl[i],t.count(arr[i]));
+            t = str(t);
+
+            t = 'inf = ' + t + '\nflname = ' + "'" + str(os.path.basename(path)) + "'";
+
+            for i in arr_ascii:
+                t = t.replace(i, arrl[arr_ascii.index(i)]);
 
             os.system('cls');
             print(l20);
             path = input();
+
             os.system("cls");
             print(l22);
             namefile = input();
-            if path[-1] == '\\':
-                path = path + namefile + '.txt';
-            else:
-                path = path + '\\' + namefile + '.txt';
-        
-            new_file = open(path,'a+',encoding="utf-8");
+
+            path = path + '\\' + namefile + '.py';
+
+            pathinit = path + '\\..\\' + "__init__.py";
+            init = open(pathinit,'w');
+
+            new_file = open(path,'w',encoding="utf-8");
             new_file.write(t);
             new_file.close();
+
             file.close();
             os.system("cls");
+        
         except:
             print(Fore.RED + l19 + Style.RESET_ALL);
             time.sleep(1.5);
@@ -387,32 +404,40 @@ while True:
             os.system('cls');
             print(l18);
             path = input();
-            file = open(path, 'r', encoding="utf-8");
-            t = file.read();
-            for i in range(len(arr)):
-                if arrl[i] in t:
-                    t = t.replace(arrl[i],arr[i]);
+
+            e_file = open(path, 'r', encoding="utf-8");
+            t = e_file.read();
+            e_file.close();
+
+            for i in range(len(arr_ascii)):
+                t = t.replace(arrl[i], arr_ascii[i]);
+            
+            ef2.write(t);
+            ef2.flush();
+
+            filename = __import__('ef');
+            flname = filename.flname;
+            inf = filename.inf;
 
             os.system('cls');
             print(l21);
             path = input();
+            path = path + '\\' + flname;
+            
+            d_file = open(path, 'wb');
+            d_file.write(inf);
+            d_file.close();
+            
+            ef2.seek(0);
+            ef2.flush();
+
             os.system("cls");
-            print(l22);
-            namefile = input();
-            if path[-1] == '\\':
-                path = path + namefile + '.txt';
-            else:
-                path = path + '\\' + namefile + '.txt';
-        
-            new_file = open(path,'a+', encoding="utf-8");
-            new_file.write(t);
-            new_file.close();
-            file.close();
-            os.system("cls");
+
         except:
             print(Fore.RED + l19 + Style.RESET_ALL);
             time.sleep(1.5);
             os.system("cls");
+
     if a == '10':
         if os.path.isfile(path):
             reset = open(path, 'w+', encoding='utf-8');
