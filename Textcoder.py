@@ -12,7 +12,10 @@ import time;
 colorama.init();
 ctypes.windll.kernel32.SetConsoleTitleW('Textcoder');
 
-ef2 = open('ef.py', 'w+', encoding="utf-8");
+init = open('__init__.py','w+');
+init.close();
+
+efnumb = 0;
 history = '';
 
 os.system("cls");
@@ -241,13 +244,10 @@ while True:
             os.system('cls');
             print(l25);
             path = input();
-            pathd = path + '\\' + '__init__.py';
-            init = open(pathd,'w');
-            init.close();
             os.system("cls");
             print(l22);
             namefile = input();
-            path = path + '\\' + namefile + '.py';
+            path = path + '\\' + namefile;
 
             new_file = open(path,'w',encoding="utf-8");
             new_file.write('arr1 = ' + str(arr) + '\n' + 'arr2 = ' + str(arrl) + '\n' + 'arr_ascii =' + str(arr_ascii));
@@ -268,14 +268,15 @@ while True:
 
             path = input();
 
-            pathd = path + '\\..\\' + '__init__.py';
+            f = open(path,'r',encoding='utf-8');
+            rf = f.read();
+            f.close();
 
-            init = open(pathd,'w+');
-            init.close();
+            f2 = open('ef.py','w+',encoding='utf-8');
+            f2.write(rf);
+            f2.close();
 
-            namefile = os.path.basename(path);
-            namefile = namefile[0:-3];
-            namefile = __import__(namefile);
+            namefile = __import__('ef');
             arr = namefile.arr1;
             arrl = namefile.arr2;
             arr_ascii = namefile.arr_ascii;
@@ -383,10 +384,7 @@ while True:
             print(l22);
             namefile = input();
 
-            path = path + '\\' + namefile + '.py';
-
-            pathinit = path + '\\..\\' + "__init__.py";
-            init = open(pathinit,'w');
+            path = path + '\\' + namefile;
 
             new_file = open(path,'w',encoding="utf-8");
             new_file.write(t);
@@ -412,12 +410,18 @@ while True:
             for i in range(len(arr_ascii)):
                 t = t.replace(arrl[i], arr_ascii[i]);
             
-            ef2.write(t);
-            ef2.flush();
+            efname = 'ef' + str(efnumb);
+            efname2 = efname + '.py';
 
-            filename = __import__('ef');
+            ef2 = open(efname2, 'w+', encoding="utf-8");
+            ef2.write(t);
+            ef2.close();
+            
+            filename = __import__(efname);
             flname = filename.flname;
             inf = filename.inf;
+
+            efnumb = efnumb + 1;
 
             os.system('cls');
             print(l21);
@@ -427,15 +431,13 @@ while True:
             d_file = open(path, 'wb');
             d_file.write(inf);
             d_file.close();
-            
-            ef2.seek(0);
-            ef2.flush();
 
             os.system("cls");
 
-        except:
+        except Exception as e:
+            print(e);
             print(Fore.RED + l19 + Style.RESET_ALL);
-            time.sleep(1.5);
+            time.sleep(30);
             os.system("cls");
 
     if a == '10':
