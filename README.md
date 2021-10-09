@@ -9,4 +9,4 @@ You can download the classic Textcoder here: https://github.com/FatlessComb1168/
 
 The development of the project is over. The program is written in Python 3.9+, which may become obsolete over time.
 
-Bill Richter is a better successor to Textcoder with a GUI and more advanced features. Download Bill Richter here: https://github.com/FatlessComb1168/billrichter.
+Bill Richter is a better successor to Textcoder with a GUI and more advanced features. Download Bill Richter here: https://github.com/FatlessComb1168/billrichter
